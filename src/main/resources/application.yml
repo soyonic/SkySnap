@@ -10,3 +10,8 @@ spring:
     hibernate:
       ddl-auto: update
 
+aviationstack:
+  api:
+    key: ${API_KEY}
+
+
