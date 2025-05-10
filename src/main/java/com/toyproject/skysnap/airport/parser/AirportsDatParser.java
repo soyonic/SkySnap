@@ -45,13 +45,6 @@ public class AirportsDatParser {
 
     public List<String> findIcaoByCity(String cityName) {
 
-//        return airportList.stream()
-//                .filter(a -> a.getCity().equalsIgnoreCase(cityName))
-//                .map(AirportInfo::getIcao)
-//                .filter(code -> code != null && !code.isEmpty())
-//                .distinct()
-//                .collect(Collectors.toList());
-
         // 포스트맨 빈 응답 때문에 로그 찍어보기
         List<String> result = airportList.stream()
                 .filter(a -> a.getCity().equalsIgnoreCase(cityName))
