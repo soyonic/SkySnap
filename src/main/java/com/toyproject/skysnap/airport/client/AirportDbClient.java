@@ -23,21 +23,26 @@ public class AirportDbClient {
     }
 
     public AirportResponseDto getAirportByIcao(String icao){
-        String url = String.format("https://airportdb.io/api/v1/airport/icao/%s", icao);
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.setBearerAuth(apiToken); // Authorization: Bearer {token}
-        HttpEntity<Void> entity = new HttpEntity<>(headers);
+        String url = String.format("https://airportdb.io/api/v1/airport/%s?apiToken=%s", icao, apiToken);
 
         try {
+            // ❌ 더 이상 헤더 필요 없음
             ResponseEntity<AirportResponseDto> response = restTemplate.exchange(
                     url,
                     HttpMethod.GET,
-                    entity,
+                    null, // 헤더 필요 X
                     AirportResponseDto.class
             );
+
+            // 빈 응답을 위해 로그 출력
+            System.out.println("API 응답: " + response.getBody());
+
             return response.getBody();
+
         } catch (Exception e) {
+            // 빈 응답을 위해 로그 출력
+            System.err.printf("ICAO 코드 %s 조회 실패: %s%n", icao, e.getMessage());
+            e.printStackTrace(); // 이거 꼭 있어야 전체 예외 로그 보여줌!
             return null;
         }
     }
